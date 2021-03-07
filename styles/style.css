@@ -77,21 +77,35 @@ main {
 }
 nav {
   grid-area: nav;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   color: #f9f9fa;
   background: #66789a;
 }
-
+nav a {
+  text-decoration: none;
+  color: #f9f9fa;
+}
 aside {
   grid-area: aside;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   color: #f9f9fa;
   background: #66789a;
 }
 footer {
   grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 8px -8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background: #f9f9fa;
+  font-size: calc(0.6rem + 0.5vw);
 }
 footer a {
   text-decoration: none;
@@ -115,6 +129,9 @@ aside {
       "footer";
     grid-template-rows: 100px 100px 1fr 100px 70px;
     grid-template-columns: 1fr;
+  }
+  nav {
+    flex-direction: row;
   }
   header,
   footer,
