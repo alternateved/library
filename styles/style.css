@@ -10,10 +10,6 @@ body {
   grid-column-gap: 10px;
   height: 100vh;
   margin: 0;
-  }  
-header, footer, main, nav, aside {
-  padding: 1.5rem;
-  background: paleturquoise;
   }
 header {
   grid-area: header;
@@ -30,6 +26,10 @@ nav {
 aside { 
   grid-area: aside; 
   } 
+  header, footer, main, nav, aside {
+    padding: 1.5rem;
+    background: paleturquoise;
+    }
 /* Stack the layout on small devices/viewports. */
 @media all and (max-width: 575px) {
   body { 
