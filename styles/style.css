@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 body {
   display: grid;
   grid-template-areas:
@@ -10,37 +13,89 @@ body {
   grid-column-gap: 10px;
   height: 100vh;
   margin: 0;
+  font-size: calc(0.6rem + 0.7vw);
+  font-family: "Roboto", sans-serif;
+  line-height: calc(1.1rem + 0.5vw);
   color: #35383f;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 header {
   grid-area: header;
+  font-size: calc(0.7rem + 1vw);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
-  box-shadow: 8px 8px 8px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 .logo img {
   width: 100%;
   height: auto;
   max-width: 200px;
 }
-footer {
-  grid-area: footer;
-  box-shadow: 8px -8px 8px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
 main {
   grid-area: main;
-  box-shadow: 0 8px 8px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  position: relative;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background: #f9f9fa;
+}
+#submit-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-width: 0;
+  outline: none;
+  height: 53px;
+  width: 53px;
+  border-radius: 50%;
+  font-family: "Roboto Mono", monospace;
+  font-size: calc(1.5rem + 0.7vw);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
+  background-color: #ceaa68;
+  color: #35383f;
+}
+#submit-button:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0;
+  padding-top: 0;
+  border-radius: 100%;
+  background-color: rgba(236, 240, 241, .3);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#submit-button:active:before {
+  width: 120%;
+  padding-top: 120%;
+  transition: width .2s ease-out, padding-top .2s ease-out;
 }
 nav {
   grid-area: nav;
-  box-shadow: 8px 0px 8px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  color: #f9f9fa;
+  background: #66789a;
 }
+
 aside {
   grid-area: aside;
-  box-shadow: 0 -8px 8px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  color: #f9f9fa;
+  background: #66789a;
+}
+footer {
+  grid-area: footer;
+  box-shadow: 8px -8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background: #f9f9fa;
+}
+footer a {
+  text-decoration: none;
+  color: #35383f;
 }
 header,
 footer,
@@ -48,7 +103,6 @@ main,
 nav,
 aside {
   padding: 1rem;
-  background: #F9F9FA;
 }
 /* Stack the layout on small devices/viewports. */
 @media all and (max-width: 575px) {
@@ -59,7 +113,7 @@ aside {
       "main"
       "aside"
       "footer";
-    grid-template-rows: 100px 200px 1fr 100px 70px;
+    grid-template-rows: 100px 100px 1fr 100px 70px;
     grid-template-columns: 1fr;
   }
   header,
