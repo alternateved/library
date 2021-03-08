@@ -105,8 +105,8 @@ button {
   cursor: pointer;
 }
 #plus-button {
-  position: absolute;
-  bottom: 15px;
+  position: fixed;
+  bottom: 125px;
   right: 15px;
   border-width: 0;
   outline: none;
@@ -285,4 +285,7 @@ input[type="number"]:focus {
   aside {
     padding: 0.5rem;
   }
+  #plus-button {
+    position: fixed;
+    bottom: 200px;
 }

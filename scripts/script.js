@@ -14,6 +14,7 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+// function that gathers all information from submitted form and pushes new book on shelf
 function addBookToLibrary() {
   const bookTitle = form.elements["title"].value;
   const bookAuthor = form.elements["author"].value;
@@ -25,6 +26,7 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
+// function that iterates through array of books and displays it on shelf
 function displayShelf() {
   while (shelf.childElementCount > 0) {
     shelf.removeChild(shelf.firstElementChild);
@@ -32,6 +34,7 @@ function displayShelf() {
   myLibrary.forEach((book) => renderBook(book));
 }
 
+// function that creates book card and appends it to shelf
 function renderBook(data) {
   const book = document.createElement("div");
   const title = document.createElement("h3");
@@ -40,12 +43,12 @@ function renderBook(data) {
   const readContainer = document.createElement("div");
   const readInformation = document.createElement("span");
   const read = document.createElement("input");
-  
+
   title.textContent = data.title;
   author.textContent = `Author: ${data.author}`;
   pages.textContent = `Number of pages: ${data.pages}`;
 
-  read.type = "checkbox"
+  read.type = "checkbox";
   read.classList.add("switch");
 
   if (data.read) {
@@ -65,6 +68,23 @@ function renderBook(data) {
 
   book.classList.add("book");
   shelf.appendChild(book);
+}
+
+//function that checks for changes in read status of added books and updates it accordingly
+function updateReadStatus() {
+  const marks = document.querySelectorAll(".book > div > .switch");
+
+  marks.forEach((mark) => {
+    mark.addEventListener("change", (event) => {
+      let bookNode = event.target.parentNode.parentNode;
+      let keyTitle = bookNode.querySelector("h3");
+
+      let targetIndex = myLibrary.findIndex(
+        (book) => book.title === keyTitle.textContent
+      );
+      myLibrary[targetIndex].read = event.target.checked;
+    });
+  });
 }
 
 function showPopupForm() {
@@ -102,10 +122,6 @@ const bookTwo = new Book("Harry Potter II", "J.K. Rowling", "223", true);
 myLibrary.push(bookTwo);
 const bookThree = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
 myLibrary.push(bookThree);
-const bookFour = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
-myLibrary.push(bookFour);
-const bookFive = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
-myLibrary.push(bookFive);
 
 popupFunctionality();
 displayShelf();
