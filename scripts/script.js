@@ -1,8 +1,11 @@
+"use strict";
+
 const popupButton = document.querySelector("#plus-button");
 const closeButton = document.querySelector(".close");
 const popup = document.querySelector("#popup");
 const form = document.querySelector(".form-content");
 const shelf = document.querySelector("#shelf");
+const stats = document.querySelectorAll(".statisics");
 
 let myLibrary = [];
 
@@ -87,6 +90,20 @@ function updateReadStatus() {
   });
 }
 
+function countStatistics() {
+  let booksRead = myLibrary.reduce((total, book) => {
+    if(book.read) total ++;
+    return total;
+  }, 0);
+
+  let booksUnread = myLibrary.reduce((total, book) => {
+    if(!book.read) total ++;
+    return total;
+  }, 0);
+
+  let allBooks = myLibrary.length;
+}
+
 function showPopupForm() {
   popup.style.display = "block";
 }
@@ -125,3 +142,5 @@ myLibrary.push(bookThree);
 
 popupFunctionality();
 displayShelf();
+updateReadStatus()
+countStatistics()
