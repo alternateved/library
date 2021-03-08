@@ -5,7 +5,7 @@ const closeButton = document.querySelector(".close");
 const popup = document.querySelector("#popup");
 const form = document.querySelector(".form-content");
 const shelf = document.querySelector("#shelf");
-const stats = document.querySelectorAll(".statisics");
+const stats = document.querySelectorAll(".statistics");
 
 let myLibrary = [];
 
@@ -46,6 +46,9 @@ function renderBook(data) {
   const readContainer = document.createElement("div");
   const readInformation = document.createElement("span");
   const read = document.createElement("input");
+  const removeButton = document.createElement("button");
+
+  book.classList.add("book");
 
   title.textContent = data.title;
   author.textContent = `Author: ${data.author}`;
@@ -62,14 +65,17 @@ function renderBook(data) {
     read.checked = false;
   }
 
+  removeButton.textContent = "Remove";
+  removeButton.classList.add("remove-button");
+  
   book.appendChild(title);
   book.appendChild(author);
   book.appendChild(pages);
   readContainer.appendChild(readInformation);
   readContainer.appendChild(read);
   book.appendChild(readContainer);
+  book.appendChild(removeButton);
 
-  book.classList.add("book");
   shelf.appendChild(book);
 }
 
@@ -90,6 +96,7 @@ function updateReadStatus() {
   });
 }
 
+// function which iterates through myLibrary and returns statistics array
 function countStatistics() {
   let booksRead = myLibrary.reduce((total, book) => {
     if (book.read) total++;
@@ -106,6 +113,7 @@ function countStatistics() {
   return [booksRead, booksUnread, allBooks];
 }
 
+// function which renders statistics
 function displayStatistics() {
   let statisticsArray = countStatistics();
 
@@ -114,6 +122,7 @@ function displayStatistics() {
       stats[i].textContent.slice(0, -1) + statisticsArray[i];
   }
 }
+
 function showPopupForm() {
   popup.style.display = "block";
 }
