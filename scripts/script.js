@@ -96,6 +96,23 @@ function updateReadStatus() {
   });
 }
 
+
+function updateBooks() {
+  const removeButtons = document.querySelectorAll(".remove-button");
+
+  removeButtons.forEach(button => button.addEventListener("click", event => {
+    let bookNode = event.target.parentNode.parentNode;
+    let keyTitle = bookNode.querySelector("h3");
+
+    let targetIndex = myLibrary.findIndex(
+      (book) => book.title === keyTitle.textContent
+    );
+    myLibrary.splice(targetIndex, 1);
+    console.log(myLibrary);
+  })
+  );
+}
+
 // function which iterates through myLibrary and returns statistics array
 function countStatistics() {
   let booksRead = myLibrary.reduce((total, book) => {
@@ -163,3 +180,5 @@ popupFunctionality();
 displayShelf();
 updateReadStatus();
 displayStatistics();
+
+updateBooks();
