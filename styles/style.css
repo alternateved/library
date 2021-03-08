@@ -39,6 +39,18 @@ main {
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background: #f9f9fa;
 }
+#shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+.book {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
+}
 button {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
   cursor: pointer;
@@ -189,7 +201,7 @@ input[type="number"]:focus {
 }
 .close:hover,
 .close:focus {
-  color: #99925D;
+  color: #99925d;
   cursor: pointer;
 }
 .checkbox {

@@ -2,6 +2,7 @@ const popupButton = document.querySelector("#plus-button");
 const closeButton = document.querySelector(".close");
 const popup = document.querySelector("#popup");
 const form = document.querySelector(".form-content");
+const shelf = document.querySelector("#shelf");
 
 let myLibrary = [];
 
@@ -22,6 +23,37 @@ function addBookToLibrary () {
   const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
   
   myLibrary.push(newBook);
+}
+
+function displayShelf () {
+  pass;
+}
+
+function renderBook(data) {
+    const book = document.createElement("div");
+    const title = document.createElement("h3");
+    const author = document.createElement("span");
+    const pages = document.createElement("span");
+    const read = document.createElement("span");
+
+    title.textContent = data.title;
+    author.textContent = data.author;
+    pages.textContent = `Number of pages: ${data.pages}`;
+    
+    if (data.read) {
+      read.textContent = "Book was devoured."
+    } else {
+      read.textContent = "Book was not devoured."
+    }
+
+    book.appendChild(title);
+    book.appendChild(author);
+    book.appendChild(pages);
+    book.appendChild(read);
+
+    book.classList.add("book");
+    shelf.appendChild(book);
+
 }
 
 function showPopupForm() {
@@ -52,6 +84,12 @@ function popupFunctionality() {
   });
 }
 
-
+const bookOne = new Book("Harry Potter I", "J.K. Rowling", "200", true);
+myLibrary.push(bookOne);
+const bookTwo = new Book("Harry Potter II", "J.K. Rowling", "223", true);
+myLibrary.push(bookTwo);
+const bookThree = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
+myLibrary.push(bookThree);
 
 popupFunctionality();
+renderBook(bookOne);
