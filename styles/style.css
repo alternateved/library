@@ -38,18 +38,67 @@ main {
   position: relative;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background: #f9f9fa;
+  overflow: auto;
 }
 #shelf {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
+  grid-gap: 1rem;
 }
 .book {
   display: flex;
   flex-direction: column;
+
   padding: 1rem;
-  box-sizing: border-box;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
+}
+.book div {
+  display: flex;
+  align-items: center;
+}
+.book > * {
+  padding: 10px;
+}
+.switch {
+  background: #f9f9fa;
+}
+input[type="checkbox"].switch {
+  font-size: 30px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 3.5rem;
+  height: 1.5rem;
+  
+  background: #ceaa68;
+  border-radius: 3em;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+input[type="checkbox"].switch:checked {
+  background: #66789a;
+}
+input[type="checkbox"].switch:after {
+  position: absolute;
+  content: "";
+  bottom: 0.01rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #f9f9fa;
+  -webkit-box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
+  left: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+input[type="checkbox"].switch:checked:after {
+  left: calc(100% - 1.5rem);
 }
 button {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
@@ -205,7 +254,14 @@ input[type="number"]:focus {
   cursor: pointer;
 }
 .checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   padding: 1rem;
+}
+.checkbox > * {
+  margin: 0.5rem;
 }
 /* Stack the layout on small devices/viewports. */
 @media all and (max-width: 575px) {

@@ -14,46 +14,57 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary () {
+function addBookToLibrary() {
   const bookTitle = form.elements["title"].value;
   const bookAuthor = form.elements["author"].value;
   const bookPages = form.elements["pages"].value;
   const bookRead = form.elements["read"].checked;
-  
+
   const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
-  
+
   myLibrary.push(newBook);
 }
 
-function displayShelf () {
-  pass;
+function displayShelf() {
+  while (shelf.childElementCount > 0) {
+    shelf.removeChild(shelf.firstElementChild);
+  }
+  myLibrary.forEach((book) => renderBook(book));
 }
 
 function renderBook(data) {
-    const book = document.createElement("div");
-    const title = document.createElement("h3");
-    const author = document.createElement("span");
-    const pages = document.createElement("span");
-    const read = document.createElement("span");
+  const book = document.createElement("div");
+  const title = document.createElement("h3");
+  const author = document.createElement("span");
+  const pages = document.createElement("span");
+  const readContainer = document.createElement("div");
+  const readInformation = document.createElement("span");
+  const read = document.createElement("input");
+  
+  title.textContent = data.title;
+  author.textContent = `Author: ${data.author}`;
+  pages.textContent = `Number of pages: ${data.pages}`;
 
-    title.textContent = data.title;
-    author.textContent = data.author;
-    pages.textContent = `Number of pages: ${data.pages}`;
-    
-    if (data.read) {
-      read.textContent = "Book was devoured."
-    } else {
-      read.textContent = "Book was not devoured."
-    }
+  read.type = "checkbox"
+  read.classList.add("switch");
 
-    book.appendChild(title);
-    book.appendChild(author);
-    book.appendChild(pages);
-    book.appendChild(read);
+  if (data.read) {
+    readInformation.textContent = "Mark as unread: ";
+    read.checked = true;
+  } else {
+    readInformation.textContent = "Mark as read: ";
+    read.checked = false;
+  }
 
-    book.classList.add("book");
-    shelf.appendChild(book);
+  book.appendChild(title);
+  book.appendChild(author);
+  book.appendChild(pages);
+  readContainer.appendChild(readInformation);
+  readContainer.appendChild(read);
+  book.appendChild(readContainer);
 
+  book.classList.add("book");
+  shelf.appendChild(book);
 }
 
 function showPopupForm() {
@@ -69,18 +80,19 @@ function popupFunctionality() {
   popupButton.addEventListener("click", showPopupForm);
   closeButton.addEventListener("click", closePopupForm);
 
-// when the user clicks anywhere outside of the modal, close it
+  // when the user clicks anywhere outside of the modal, close it
   window.addEventListener("click", (event) => {
     if (event.target == popup) {
       popup.style.display = "none";
     }
   });
-// intercept submit event
-  form.addEventListener('submit', event => {
+  // intercept submit event
+  form.addEventListener("submit", (event) => {
     addBookToLibrary();
     closePopupForm();
+    displayShelf();
     form.reset();
-    event.preventDefault()
+    event.preventDefault();
   });
 }
 
@@ -90,6 +102,10 @@ const bookTwo = new Book("Harry Potter II", "J.K. Rowling", "223", true);
 myLibrary.push(bookTwo);
 const bookThree = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
 myLibrary.push(bookThree);
+const bookFour = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
+myLibrary.push(bookFour);
+const bookFive = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
+myLibrary.push(bookFive);
 
 popupFunctionality();
-renderBook(bookOne);
+displayShelf();
