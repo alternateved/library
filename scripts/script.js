@@ -92,18 +92,28 @@ function updateReadStatus() {
 
 function countStatistics() {
   let booksRead = myLibrary.reduce((total, book) => {
-    if(book.read) total ++;
+    if (book.read) total++;
     return total;
   }, 0);
 
   let booksUnread = myLibrary.reduce((total, book) => {
-    if(!book.read) total ++;
+    if (!book.read) total++;
     return total;
   }, 0);
 
   let allBooks = myLibrary.length;
+
+  return [booksRead, booksUnread, allBooks];
 }
 
+function displayStatistics() {
+  let statisticsArray = countStatistics();
+
+  for (let i = 0; i < statisticsArray.length; i++) {
+    stats[i].textContent =
+      stats[i].textContent.slice(0, -1) + statisticsArray[i];
+  }
+}
 function showPopupForm() {
   popup.style.display = "block";
 }
@@ -142,5 +152,5 @@ myLibrary.push(bookThree);
 
 popupFunctionality();
 displayShelf();
-updateReadStatus()
-countStatistics()
+updateReadStatus();
+displayStatistics();
