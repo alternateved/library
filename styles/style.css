@@ -77,7 +77,6 @@ input[type="checkbox"].switch {
   appearance: none;
   width: 3.5rem;
   height: 1.5rem;
-  
   background: #ceaa68;
   border-radius: 3em;
   position: relative;
@@ -297,4 +296,10 @@ input[type="number"]:focus {
   #plus-button {
     position: fixed;
     bottom: 200px;
+  }
+  .form {
+    left: -50vw;
+    width: 200%; /* Full width */
+    height: 100%; /* Full height */
+  }
 }
