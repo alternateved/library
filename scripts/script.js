@@ -131,9 +131,12 @@ function updateReadStatus(event) {
 
 // function that dynamically updates library whenever element is removed
 function updateBooks(event) {
-  let bookNode = event.target.parentNode.parentNode;
+  let bookNode = event.target.parentNode;
+  let title = bookNode.querySelector("h3").textContent;
 
-  myLibrary.splice(bookNode, 1);
+  let targetIndex = myLibrary.findIndex(book => book.title === title);
+
+  myLibrary.splice(targetIndex, 1);
 
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
   displayStatistics();
