@@ -125,22 +125,21 @@ function updateReadStatus(event) {
   );
   myLibrary[targetIndex].read = event.target.checked;
 
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
   displayStatistics();
 }
 
 // function that dynamically updates library whenever element is removed
 function updateBooks(event) {
   let bookNode = event.target.parentNode.parentNode;
-  let keyTitle = bookNode.querySelector("h3");
 
-  let targetIndex = myLibrary.findIndex(
-    (book) => book.title === keyTitle.textContent
-  );
-  myLibrary.splice(targetIndex, 1);
+  myLibrary.splice(bookNode, 1);
 
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
   displayStatistics();
   displayShelf();
 }
+
 
 // function which iterates through myLibrary and returns statistics array
 function countStatistics() {
