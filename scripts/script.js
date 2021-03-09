@@ -6,6 +6,8 @@ const popup = document.querySelector("#popup");
 const form = document.querySelector(".form-content");
 const shelf = document.querySelector("#shelf");
 const stats = document.querySelectorAll(".statistics");
+const theme = document.querySelector("#theme-link");
+const switchButton = document.querySelector("#inner-div");
 
 let myLibrary = [];
 
@@ -22,7 +24,7 @@ function Book(title, author, pages, src, read) {
 
 // function that checks localStorage for myLibrary array
 function checkStorage() {
-  if(localStorage.getItem("myLibrary")) {
+  if (localStorage.getItem("myLibrary")) {
     const storageLibrary = JSON.parse(localStorage.getItem("myLibrary"));
     myLibrary = storageLibrary;
     displayShelf();
@@ -40,7 +42,13 @@ function addBookToLibrary() {
   const bookPages = form.elements["pages"].value;
   const bookCover = form.elements["cover"].value;
   const bookRead = form.elements["read"].checked;
-  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookCover, bookRead);
+  const newBook = new Book(
+    bookTitle,
+    bookAuthor,
+    bookPages,
+    bookCover,
+    bookRead
+  );
 
   myLibrary.push(newBook);
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
@@ -81,7 +89,7 @@ function renderBook(data) {
 
   read.type = "checkbox";
   read.classList.add("switch");
-  
+
   if (data.read) {
     readInformation.textContent = "Mark as unread: ";
     read.checked = true;
@@ -109,31 +117,29 @@ function renderBook(data) {
 
 //function that checks for changes in read status of added books and updates it accordingly
 function updateReadStatus(event) {
-      
-      let bookNode = event.target.parentNode.parentNode;
-      let keyTitle = bookNode.querySelector("h3");
+  let bookNode = event.target.parentNode.parentNode;
+  let keyTitle = bookNode.querySelector("h3");
 
-      let targetIndex = myLibrary.findIndex(
-        (book) => book.title === keyTitle.textContent
-      );
-      myLibrary[targetIndex].read = event.target.checked;
+  let targetIndex = myLibrary.findIndex(
+    (book) => book.title === keyTitle.textContent
+  );
+  myLibrary[targetIndex].read = event.target.checked;
 
-      displayStatistics();
+  displayStatistics();
 }
 
 // function that dynamically updates library whenever element is removed
 function updateBooks(event) {
+  let bookNode = event.target.parentNode.parentNode;
+  let keyTitle = bookNode.querySelector("h3");
 
-      let bookNode = event.target.parentNode.parentNode;
-      let keyTitle = bookNode.querySelector("h3");
+  let targetIndex = myLibrary.findIndex(
+    (book) => book.title === keyTitle.textContent
+  );
+  myLibrary.splice(targetIndex, 1);
 
-      let targetIndex = myLibrary.findIndex(
-        (book) => book.title === keyTitle.textContent
-      );
-      myLibrary.splice(targetIndex, 1);
-
-      displayStatistics();
-      displayShelf();
+  displayStatistics();
+  displayShelf();
 }
 
 // function which iterates through myLibrary and returns statistics array
@@ -161,6 +167,17 @@ function displayStatistics() {
     stats[i].textContent =
       stats[i].textContent.slice(0, -1) + statisticsArray[i];
   }
+}
+
+// function that switches css file when user use toggle button
+function changetheme() {
+  switchButton.addEventListener("click", function () {
+    if (theme.getAttribute("href") === "styles/light-theme.css") {
+      theme.href = "styles/dark-theme.css";
+    } else {
+      theme.href = "styles/light-theme.css";
+    }
+  });
 }
 
 function showPopupForm() {
@@ -194,17 +211,36 @@ function popupFunctionality() {
 }
 
 function main() {
-  const bookOne = new Book("Philosophical Investigations", "Ludwig Wittgenstein ", "256", "https://images-na.ssl-images-amazon.com/images/I/81dAh6pGsiL.jpg", true);
+  const bookOne = new Book(
+    "Philosophical Investigations",
+    "Ludwig Wittgenstein ",
+    "256",
+    "https://images-na.ssl-images-amazon.com/images/I/81dAh6pGsiL.jpg",
+    true
+  );
   myLibrary.push(bookOne);
-  const bookTwo = new Book("Molloy", "Samuel Beckett", "256", "https://www.bookcity.pl/bigcovers/3/7/1/6/9780571243716.jpg", false);
+  const bookTwo = new Book(
+    "Molloy",
+    "Samuel Beckett",
+    "256",
+    "https://www.bookcity.pl/bigcovers/3/7/1/6/9780571243716.jpg",
+    false
+  );
   myLibrary.push(bookTwo);
-  const bookThree = new Book("Walden", "Henry David Thoreau", "226", "https://prodimage.images-bn.com/pimages/9781454929147_p0_v1_s1200x630.jpg", true);
+  const bookThree = new Book(
+    "Walden",
+    "Henry David Thoreau",
+    "226",
+    "https://prodimage.images-bn.com/pimages/9781454929147_p0_v1_s1200x630.jpg",
+    true
+  );
   myLibrary.push(bookThree);
-  
+
   popupFunctionality();
   checkStorage();
   displayShelf();
   displayStatistics();
+  changetheme();
 }
 
 main();

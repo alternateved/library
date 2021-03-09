@@ -16,8 +16,8 @@ body {
   font-size: calc(0.6rem + 0.7vw);
   font-family: "Roboto", sans-serif;
   line-height: calc(1.1rem + 0.5vw);
-  color: #35383f;
-  background-color: #ffffff;
+  color: #f9f9fa;
+  background-color: #121212;
 }
 header {
   grid-area: header;
@@ -26,6 +26,8 @@ header {
   justify-content: center;
   align-items: center;
   padding: 0;
+  color: #a3b0c4;
+  background: #353535; /* 12dp */
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 .logo img {
@@ -36,8 +38,8 @@ header {
 main {
   grid-area: main;
   position: relative;
-  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  background: #f9f9fa;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background: #2a2a2a; /* 08dp */
   overflow: auto;
 }
 #shelf {
@@ -51,8 +53,12 @@ main {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
+  background: #353535; /* 04dp */
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.23);
   font-size: calc(0.6rem + 0.5vw);
+}
+.book:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .img {
   width: 200px;
@@ -66,10 +72,10 @@ main {
   padding: 0.5rem;
 }
 .switch {
-  background: #f9f9fa;
+  background: #353535;
 }
 .remove-button {
-  background-color: #ceaa68;
+  background-color: #e2cca3;
   color: #35383f;
   padding: 0.4rem;
   margin: 1rem 0.5rem;
@@ -83,7 +89,7 @@ input[type="checkbox"].switch {
   appearance: none;
   width: 3.5rem;
   height: 1.5rem;
-  background: #ceaa68;
+  background: #e2cca3;
   border-radius: 3em;
   position: relative;
   cursor: pointer;
@@ -92,7 +98,7 @@ input[type="checkbox"].switch {
   transition: all 0.2s ease-in-out;
 }
 input[type="checkbox"].switch:checked {
-  background: #66789a;
+  background: #a3b0c4;
 }
 input[type="checkbox"].switch:after {
   position: absolute;
@@ -101,7 +107,7 @@ input[type="checkbox"].switch:after {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  background: #f9f9fa;
+  background: #35383f;
   -webkit-box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
   -webkit-transform: scale(0.7);
@@ -127,7 +133,7 @@ button {
   height: 53px;
   width: 53px;
   border-radius: 50%;
-  background-color: #ceaa68;
+  background-color: #e2cca3;
   color: #35383f;
   font-size: calc(1.5rem + 0.7vw);
   font-family: "Roboto Mono", monospace;
@@ -161,11 +167,28 @@ nav {
   justify-content: space-around;
   box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   color: #f9f9fa;
-  background: #66789a;
+  background: #353535;
 }
 nav a {
   text-decoration: none;
   color: #f9f9fa;
+}
+#outer-div{
+  width: 80px;
+  height: 30px;
+  border: 2px solid #f9f9fa;
+  border-radius: 25px;
+}
+#inner-div{
+  width: 30px;
+  height: 30px;
+  border: 1px solid transparent;
+  background-color: #f9f9fa;
+  border-radius: 50px;
+  position: relative;
+  bottom: 1px;
+  transform: translateX(48px);
+  transition: 0.4s all ease-in-out;
 }
 aside {
   grid-area: aside;
@@ -174,7 +197,7 @@ aside {
   align-items: center;
   box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   color: #f9f9fa;
-  background: #66789a;
+  background: #353535;
 }
 footer {
   grid-area: footer;
@@ -182,12 +205,12 @@ footer {
   justify-content: center;
   align-items: center;
   box-shadow: 8px -8px 8px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  background: #f9f9fa;
+  background: #353535;
   font-size: calc(0.6rem + 0.5vw);
 }
 footer a {
   text-decoration: none;
-  color: #35383f;
+  color: #f9f9fa;
 }
 header,
 footer,
@@ -216,12 +239,12 @@ aside {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: #66789a;
+  background-color: #121212;
   padding-top: 5rem;
 }
 /* Form Content/Box */
 .form-content {
-  background-color: #f9f9fa;
+  background-color: #353535;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
   width: 40%; /* Could be more or less, depending on screen size */
@@ -244,7 +267,6 @@ input[type="number"]:focus {
   background-color: rgb(235, 235, 235);
   outline: none;
 }
-/* Set a style for all buttons */
 #submit-button {
   background-color: #66789a;
   color: #f9f9fa;
@@ -260,7 +282,7 @@ input[type="number"]:focus {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color: #35383f;
+  color: #f9f9fa;
 }
 .close:hover,
 .close:focus {
@@ -290,7 +312,24 @@ input[type="number"]:focus {
     grid-template-columns: 1fr;
   }
   nav {
-    flex-direction: row;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    margin: auto;
+  }
+  #outer-div{
+    width: 30px;
+    height: 15px;
+    border: 2px solid #f9f9fa;
+    border-radius: 25px;
+  }
+  #inner-div{
+    width: 15px;
+    height: 15px;
+    border: 1px solid transparent;
+    background-color: #f9f9fa;
+    border-radius: 50px;
+    transform: translateX(0px);
+    transition: 0.4s all ease-in-out;
   }
   header,
   footer,
