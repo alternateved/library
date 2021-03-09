@@ -17,6 +17,19 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+// function that checks localStorage for myLibrary array
+function checkStorage() {
+  if(localStorage.getItem("myLibrary")) {
+    const storageLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+    myLibrary = storageLibrary;
+    displayShelf();
+    displayStatistics();
+  } else {
+    displayShelf();
+    displayStatistics();
+  }
+}
+
 // function that gathers all information from submitted form and pushes new book on shelf
 function addBookToLibrary() {
   const bookTitle = form.elements["title"].value;
@@ -27,6 +40,7 @@ function addBookToLibrary() {
   const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
 
   myLibrary.push(newBook);
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
 // function that iterates through array of books and displays it on shelf
@@ -169,14 +183,15 @@ function popupFunctionality() {
 }
 
 function main() {
-  const bookOne = new Book("Harry Potter I", "J.K. Rowling", "200", true);
+  const bookOne = new Book("Philosophical Investigations", "Ludwig Wittgenstein ", "256", true);
   myLibrary.push(bookOne);
-  const bookTwo = new Book("Harry Potter II", "J.K. Rowling", "223", true);
+  const bookTwo = new Book("Molloy", "Samuel Beckett", "256", false);
   myLibrary.push(bookTwo);
-  const bookThree = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
+  const bookThree = new Book("Walden", "Henry David Thoreau", "226", true);
   myLibrary.push(bookThree);
   
   popupFunctionality();
+  checkStorage();
   displayShelf();
   displayStatistics();
 }
