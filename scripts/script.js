@@ -10,11 +10,14 @@ const stats = document.querySelectorAll(".statistics");
 let myLibrary = [];
 
 // Book constructor
-function Book(title, author, pages, read) {
+function Book(title, author, pages, src, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  if (src) {
+    this.src = src;
+  }
 }
 
 // function that checks localStorage for myLibrary array
@@ -35,9 +38,9 @@ function addBookToLibrary() {
   const bookTitle = form.elements["title"].value;
   const bookAuthor = form.elements["author"].value;
   const bookPages = form.elements["pages"].value;
+  const bookCover = form.elements["cover"].value;
   const bookRead = form.elements["read"].checked;
-
-  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookCover, bookRead);
 
   myLibrary.push(newBook);
   localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
@@ -63,6 +66,14 @@ function renderBook(data) {
   const removeButton = document.createElement("button");
 
   book.classList.add("book");
+
+  if (data.src) {
+    const image = document.createElement("img");
+    image.setAttribute("src", data.src);
+    image.setAttribute("alt", "book-cover");
+    image.classList.add("img");
+    book.appendChild(image);
+  }
 
   title.textContent = data.title;
   author.textContent = `Author: ${data.author}`;
@@ -183,11 +194,11 @@ function popupFunctionality() {
 }
 
 function main() {
-  const bookOne = new Book("Philosophical Investigations", "Ludwig Wittgenstein ", "256", true);
+  const bookOne = new Book("Philosophical Investigations", "Ludwig Wittgenstein ", "256", "https://images-na.ssl-images-amazon.com/images/I/81dAh6pGsiL.jpg", true);
   myLibrary.push(bookOne);
-  const bookTwo = new Book("Molloy", "Samuel Beckett", "256", false);
+  const bookTwo = new Book("Molloy", "Samuel Beckett", "256", "https://www.bookcity.pl/bigcovers/3/7/1/6/9780571243716.jpg", false);
   myLibrary.push(bookTwo);
-  const bookThree = new Book("Walden", "Henry David Thoreau", "226", true);
+  const bookThree = new Book("Walden", "Henry David Thoreau", "226", "https://prodimage.images-bn.com/pimages/9781454929147_p0_v1_s1200x630.jpg", true);
   myLibrary.push(bookThree);
   
   popupFunctionality();
