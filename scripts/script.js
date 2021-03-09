@@ -56,7 +56,7 @@ function renderBook(data) {
 
   read.type = "checkbox";
   read.classList.add("switch");
-
+  
   if (data.read) {
     readInformation.textContent = "Mark as unread: ";
     read.checked = true;
@@ -65,9 +65,12 @@ function renderBook(data) {
     read.checked = false;
   }
 
+  read.addEventListener("change", updateReadStatus);
+
   removeButton.textContent = "Remove";
   removeButton.classList.add("remove-button");
-  
+  removeButton.addEventListener("click", updateBooks);
+
   book.appendChild(title);
   book.appendChild(author);
   book.appendChild(pages);
@@ -80,11 +83,8 @@ function renderBook(data) {
 }
 
 //function that checks for changes in read status of added books and updates it accordingly
-function updateReadStatus() {
-  const marks = document.querySelectorAll(".book > div > .switch");
-
-  marks.forEach((mark) => {
-    mark.addEventListener("change", (event) => {
+function updateReadStatus(event) {
+      
       let bookNode = event.target.parentNode.parentNode;
       let keyTitle = bookNode.querySelector("h3");
 
@@ -92,25 +92,23 @@ function updateReadStatus() {
         (book) => book.title === keyTitle.textContent
       );
       myLibrary[targetIndex].read = event.target.checked;
-    });
-  });
+
+      displayStatistics();
 }
 
+// function that dynamically updates library whenever element is removed
+function updateBooks(event) {
 
-function updateBooks() {
-  const removeButtons = document.querySelectorAll(".remove-button");
+      let bookNode = event.target.parentNode.parentNode;
+      let keyTitle = bookNode.querySelector("h3");
 
-  removeButtons.forEach(button => button.addEventListener("click", event => {
-    let bookNode = event.target.parentNode.parentNode;
-    let keyTitle = bookNode.querySelector("h3");
+      let targetIndex = myLibrary.findIndex(
+        (book) => book.title === keyTitle.textContent
+      );
+      myLibrary.splice(targetIndex, 1);
 
-    let targetIndex = myLibrary.findIndex(
-      (book) => book.title === keyTitle.textContent
-    );
-    myLibrary.splice(targetIndex, 1);
-    console.log(myLibrary);
-  })
-  );
+      displayStatistics();
+      displayShelf();
 }
 
 // function which iterates through myLibrary and returns statistics array
@@ -164,21 +162,23 @@ function popupFunctionality() {
     addBookToLibrary();
     closePopupForm();
     displayShelf();
+    displayStatistics();
     form.reset();
     event.preventDefault();
   });
 }
 
-const bookOne = new Book("Harry Potter I", "J.K. Rowling", "200", true);
-myLibrary.push(bookOne);
-const bookTwo = new Book("Harry Potter II", "J.K. Rowling", "223", true);
-myLibrary.push(bookTwo);
-const bookThree = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
-myLibrary.push(bookThree);
+function main() {
+  const bookOne = new Book("Harry Potter I", "J.K. Rowling", "200", true);
+  myLibrary.push(bookOne);
+  const bookTwo = new Book("Harry Potter II", "J.K. Rowling", "223", true);
+  myLibrary.push(bookTwo);
+  const bookThree = new Book("The Hobbit", "J.R.R. Tolkien", "300", true);
+  myLibrary.push(bookThree);
+  
+  popupFunctionality();
+  displayShelf();
+  displayStatistics();
+}
 
-popupFunctionality();
-displayShelf();
-updateReadStatus();
-displayStatistics();
-
-updateBooks();
+main();
