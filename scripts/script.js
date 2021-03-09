@@ -140,7 +140,6 @@ function updateBooks(event) {
   displayShelf();
 }
 
-
 // function which iterates through myLibrary and returns statistics array
 function countStatistics() {
   let booksRead = myLibrary.reduce((total, book) => {
