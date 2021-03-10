@@ -24,6 +24,7 @@ Implementation of library application from [The Odin Project](https://www.theodi
 * Heavily inspired by Material Design
 * Created separate stylesheets for **light and dark mode**
 * Learned how to **save data to** `localStorage`
+* Learned how to add **favicon**
 * Learned about JSON stringify and parse methods which made handling the object data possible
 * Learned how to **create a popup form**
 * Deepened knowledge of creating a **color palette** to a website
