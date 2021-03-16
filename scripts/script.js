@@ -12,13 +12,15 @@ const switchButton = document.querySelector("#inner-div");
 let myLibrary = [];
 
 // Book constructor
-function Book(title, author, pages, src, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  if (src) {
-    this.src = src;
+class Book {
+  constructor(title, author, pages, src, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    if (src) {
+      this.src = src;
+    }
   }
 }
 
@@ -134,7 +136,7 @@ function updateBooks(event) {
   let bookNode = event.target.parentNode;
   let title = bookNode.querySelector("h3").textContent;
 
-  let targetIndex = myLibrary.findIndex(book => book.title === title);
+  let targetIndex = myLibrary.findIndex((book) => book.title === title);
 
   myLibrary.splice(targetIndex, 1);
 
