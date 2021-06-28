@@ -31,12 +31,12 @@ Implementation of library application from [The Odin Project](https://www.theodi
 * deepened knowledge of **DOM manipulation**, **HTML structure**, **CSS styling subtleties** and **JS functionality** in general
 
 
-### **Tools:**
+### **Tools**
 * Visual Studio Code
 * Linux terminal
 * Git and GitHub
 * Adobe Color
 
 
-### **Third party code:**
+### **Third party code**
 * [Google Fonts](https://fonts.google.com/)
